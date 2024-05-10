@@ -23,7 +23,7 @@ export function handleApiError(
 
 // 添加请求拦截器，会在请求之前执行
 http.interceptors.request.use(
-    function (config: AxiosRequestConfig) {
+    function (config: AxiosRequestConfig): AxiosRequestConfig<any> {
     const tokenStore = useTokenStore()
 
     // 如果是登录状态
