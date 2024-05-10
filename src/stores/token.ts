@@ -1,0 +1,44 @@
+import { useUserStore } from "@/stores/user"
+
+export const useTokenStore = defineStore(
+    "token",
+    () => {
+        const userStore = useUserStore()
+
+        const token = ref("")
+
+        // 是否是登录状态
+        const isLogined = computed(() => token.value !== "")
+
+        watch(token, (value) => {
+            if (value) {
+                // 更新用户自身信息
+                userStore.updateSelfInfo()
+            }
+        })
+
+        function logout() {
+            // 登出
+            token.value = ""
+
+            const route = useRoute()
+            const router = useRouter()
+            if (route?.meta.requireAuth) {
+                router.push({
+                    name: "Login",
+                    // 保存我们所在的位置，以便以后再来
+                    query: { redirect: route.fullPath },
+                })
+            }
+        }
+
+        return {
+            token,
+            isLogined,
+            logout
+        }
+    }, 
+    {
+        persist: true, // 开启持久化
+    }
+)

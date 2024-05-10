@@ -1,0 +1,1 @@
+type Locales = "zh" | "en"

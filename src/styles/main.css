@@ -1,0 +1,23 @@
+@import "./media.css";
+@import "./theme.css";
+@import "./global.css";
+
+:root {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+
+  /* 继承 */
+  color: var(--text-color);
+
+  /* 不继承 */
+  background-color: var(--background-color);
+  transition: background-color 1s;
+}
